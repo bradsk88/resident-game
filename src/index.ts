@@ -1,22 +1,17 @@
-const name = 'Resident';
-const seed = 'Development'; // TODO: Generate this on first play and store it
-let story: StoryEvent[] = [];
+import {generateStoryEvent} from "./events/generate";
+import * as seedrandom from 'seedrandom'
+import {StoryEvent} from "./types";
 
-interface StoryEvent {
-    description: string;
-}
+const seed = 'Development' // TODO: Generate this on first play and store it
+const Random = seedrandom(seed)
 
-function generateStoryEvent(): StoryEvent {
-    return {
-        description: 'Walked 100 meters'
-    }
-}
+let story: StoryEvent[] = []
 
 for (let i = 0; i < 12; i++) {
-    story.push(generateStoryEvent());
+    story.push(generateStoryEvent(Random))
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const storyText = story.map(v => v.description)
-    document.getElementById('story').innerText = story.join('<br/>');
+    document.getElementById('story').innerHTML = storyText.join('<br/>')
 });

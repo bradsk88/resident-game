@@ -1,5 +1,5 @@
 # resident-game
-A random-event-driver idle adventure/base building game played locally in a browser
+A random-event-driven idle adventure/base building game played locally in a browser
 
 # Status
 This is still in the early proof-of-concept stages.

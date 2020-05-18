@@ -7,11 +7,26 @@ const Random = seedrandom(seed)
 
 let story: StoryEvent[] = []
 
-for (let i = 0; i < 12; i++) {
-    story.push(generateStoryEvent(Random))
+async function updateStory(prevEvent?: StoryEvent) {
+    const newEvent = generateStoryEvent(Random);
+    if (newEvent.description === prevEvent?.description) {
+        await updateStory(prevEvent);
+        return
+    }
+    story.push(newEvent);
+    const toHTML = (desc: string) => {
+        const text = document.createElement('div');
+        text.innerHTML = desc;
+        return text;
+    }
+    const storyDiv = document.getElementById('story');
+    storyDiv.appendChild(toHTML(newEvent.description));
+    const container = document.getElementById('story-container');
+    container.scrollTo(0, storyDiv.scrollHeight);
+    setTimeout(() => updateStory(newEvent), 30000);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const storyText = story.map(v => v.description)
-    document.getElementById('story').innerHTML = storyText.join('<br/>')
+    console.log('READY', new Date())
+    updateStory();
 });

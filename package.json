@@ -1,7 +1,7 @@
 {
   "name": "resident-game",
   "version": "0.0.1",
-  "description": "An random-event-driver idle adventure/base building game played locally in a browser",
+  "description": "A random-event-driver idle adventure/base building game played locally in a browser",
   "private": true,
   "dependencies": {
     "seedrandom": "<3.0.0",

@@ -14,11 +14,11 @@
     "jest": "^26.0.1",
     "ts-loader": "^7.0.4",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
+    "webpack-cli": "^3.3.11"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm install; webpack --config webpack.config.js; echo \"\\nNow, open dist/index.html in a browser\"\\n",
+    "build": "npm install; webpack --config webpack.config.js; echo -e \"\\nNow, open dist/index.html in a browser\\n\"",
     "serve": "node persistent-server/server.js"
   },
   "author": "Brad Johnson",

@@ -13,7 +13,7 @@ https://trello.com/b/XL3mSfvh/resident-game
 
 - Use the `npm run build` command to generate the executable files
 - In a browser, open `dist/index.html`
-- The game should start running, generating random event and printing 
+- The game should start running, generating random events and printing 
   them out every few seconds
   
 ## Using the persistent server

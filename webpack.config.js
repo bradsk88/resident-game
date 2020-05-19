@@ -1,4 +1,5 @@
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
 const mode = 'development';
 
@@ -42,9 +43,12 @@ const serverConfig = {
     resolve: {
         extensions: [ '.tsx', '.ts' , '.js'],
     },
+    externals: [nodeExternals()],
     output: {
         filename: 'node-local-server.js',
         path: path.resolve(__dirname, 'dist'),
+        library: 'residentServer',
+        libraryTarget: 'umd'
     },
 }
 

@@ -1,5 +1,4 @@
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
 
 const mode = 'development';
 
@@ -27,30 +26,34 @@ const clientConfig = {
     },
 };
 
-const serverConfig = {
-    mode: mode,
-    target: 'node',
-    entry: './src/server/local.ts',
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
-            },
-        ],
-    },
-    resolve: {
-        extensions: [ '.tsx', '.ts' , '.js'],
-    },
-    externals: [nodeExternals()],
-    output: {
-        filename: 'node-local-server.js',
-        path: path.resolve(__dirname, 'dist'),
-        library: 'residentServer',
-        libraryTarget: 'umd'
-    },
+function nodeConfig(filePath, name) {
+    return {
+        mode: mode,
+        target: 'node',
+        entry: filePath,
+        module: {
+            rules: [
+                {
+                    test: /\.tsx?$/,
+                    use: 'ts-loader',
+                    exclude: /node_modules/,
+                },
+            ],
+        },
+        resolve: {
+            extensions: [ '.tsx', '.ts' , '.js'],
+        },
+        output: {
+            filename: name + '.node.js',
+            path: path.resolve(__dirname, 'dist'),
+            library: name,
+            libraryTarget: 'umd'
+        },
+    }
 }
 
+const serverConfig = nodeConfig('./src/server/local.ts', 'residentServer');
+const eventsConfig = nodeConfig('./src/events/index.ts', 'residentEvents');
 
-module.exports = [ clientConfig, serverConfig ];
+
+module.exports = [ clientConfig, serverConfig, eventsConfig];

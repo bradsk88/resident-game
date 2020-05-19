@@ -10,5 +10,4 @@ export class LocalServer implements Server {
     public walk(): Promise<StoryEvent> {
         return Promise.resolve(generateStoryEvent(this.Random));
     }
-
 }

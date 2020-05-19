@@ -1,0 +1,1 @@
+export {serializeStoryEvent} from './serialize';

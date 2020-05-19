@@ -4,6 +4,10 @@
   "description": "A random-event-driver idle adventure/base building game played locally in a browser",
   "private": true,
   "dependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "seedrandom": "<3.0.0",
     "typescript": "^3.9.2"
   },

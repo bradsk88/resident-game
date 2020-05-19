@@ -1,14 +1,23 @@
 import {generateStoryEvent} from "./events/generate";
-import * as seedrandom from 'seedrandom'
-import {StoryEvent} from "./types";
 
-const seed = 'Development' // TODO: Generate this on first play and store it
-const Random = seedrandom(seed)
+import {StoryEvent} from "./types";
+import {Server} from "./server/interface";
+import {LocalServer} from "./server/local";
+import {PersistentServer} from "./server/persistent";
 
 let story: StoryEvent[] = []
 
+const usePersistentServer = false;
+
+let server: Server;
+if (usePersistentServer) {
+    server = new PersistentServer();
+} else {
+    server = new LocalServer();
+}
+
 async function updateStory(prevEvent?: StoryEvent) {
-    const newEvent = generateStoryEvent(Random);
+    const newEvent = await server.walk();
     if (newEvent.description === prevEvent?.description) {
         await updateStory(prevEvent);
         return

@@ -63,5 +63,5 @@ async function tryUpdateLater(evt?: StoryEvent) {
         } catch {
             await tryUpdateLater(evt);
         }
-    }, 3000);
+    }, 5000);
 }

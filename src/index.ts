@@ -1,5 +1,3 @@
-import {generateStoryEvent} from "./events/generate";
-
 import {StoryEvent} from "./types";
 import {Server} from "./server/interface";
 import {LocalServer} from "./server/local";

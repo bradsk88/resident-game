@@ -1,29 +1,14 @@
 <html>
 <head>
-    <script type="text/javascript" src="client.bundle.js"></script>
-    <link rel="stylesheet" href="styles/loading.css"/>
-    <style type="text/css">
-        body {
-            font-size: 16px;
-            line-height: 1.5em;
-        }
-        #story-container {
-            height: 9em;
-            overflow-y: scroll;
-        }
-    </style>
+    <script type="text/javascript" src="embed.bundle.js"></script>
+    <script type="text/javascript">
+        const t = document.getElementById('target');
+        embed(t, '.');
+    </script>
 </head>
 <body>
 <img src="../src/resources/dweller.svg">
-<div id="story-container">
-    <div class="story" id="story"></div>
-    <div class="lds-ellipsis">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
+<div id="target"></div>
 <button id="toggle-button">Toggle</button><span id="server-display"></span>
 </body>
 </html>

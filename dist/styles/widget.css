@@ -1,0 +1,8 @@
+.widget {
+    font-size: 16px;
+    line-height: 1.5em;
+}
+.widget#story-container {
+    height: 9em;
+    overflow-y: scroll;
+}

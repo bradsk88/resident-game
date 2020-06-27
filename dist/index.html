@@ -1,6 +1,13 @@
 <html>
 <head>
     <script type="text/javascript" src="embed.bundle.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            window.Resident.container = document.getElementById('target');
+            window.Resident.embed();
+        });
+
+    </script>
 </head>
 <body>
 <img src="../src/resources/dweller.svg">

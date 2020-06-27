@@ -7,18 +7,8 @@ declare interface Window {
     },
 }
 
-// TODO: Produce a single bundle file that includes both the embed code and the client-side server code.  This will be uploaded to github as a release (Drag and drop)
 window.Resident = {};
-window.Resident.embed = function embed(target: any, sourceLocation: string): void {
-    // TODO: Include these in the bundle file
-    // const clientStyles = document.createElement('link');
-    // clientStyles.rel = 'stylesheet';
-    // clientStyles.href = `${sourceLocation}/styles/loading.css`;
-    // document.head.appendChild(clientStyles);
-    // const clientScript = document.createElement('script');
-    // clientScript.type = 'text/javascript';
-    // clientScript.src = `${sourceLocation}/client.bundle.js`;
-    // document.head.appendChild(clientScript);
+window.Resident.embed = function embed(): void {
     const widget = document.createElement('div');
     widget.classList.add('widget');
     window.Resident.storyContainer = document.createElement('div');

@@ -7,7 +7,7 @@ const clientConfig = {
     entry: {
         client: './src/index.ts',
         server: './src/server/local.ts',
-        embed: './src/embed.ts',
+        embed: './src/embed.entry.ts',
     },
     module: {
         rules: [

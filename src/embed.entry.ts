@@ -1,0 +1,2 @@
+require('./embed');
+require('./index');

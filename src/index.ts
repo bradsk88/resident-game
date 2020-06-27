@@ -9,6 +9,7 @@ let usePersistentServer = true;
 
 let server: Server;
 
+// TODO: Decide server from external config file
 async function toggleServer() {
     usePersistentServer = !usePersistentServer;
     if (usePersistentServer) {
@@ -18,20 +19,9 @@ async function toggleServer() {
     }
 }
 
-function updateServerDisplay() {
-    document.getElementById('server-display').innerText =
-        usePersistentServer ? 'Using persistent server'
-            : 'Using local server';
-}
-
 console.log('READY', new Date())
-toggleServer(); updateServerDisplay();
+toggleServer();
 tryUpdateLater();
-document.getElementById('toggle-button').addEventListener('click', () => {
-    console.log('clicked');
-    toggleServer();
-    updateServerDisplay();
-});
 
 async function updateStory(prevEvent?: StoryEvent) {
     const newEvent = await server.walk();
@@ -45,9 +35,9 @@ async function updateStory(prevEvent?: StoryEvent) {
         text.innerHTML = desc;
         return text;
     }
-    const storyDiv = document.getElementById('story');
+    const storyDiv = window.Resident.story;
     storyDiv.appendChild(toHTML(newEvent.description));
-    const container = document.getElementById('story-container');
+    const container = window.Resident.storyContainer;
     container.scrollTo(0, storyDiv.scrollHeight);
     tryUpdateLater(newEvent);
 }

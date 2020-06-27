@@ -24,15 +24,13 @@ function updateServerDisplay() {
             : 'Using local server';
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log('READY', new Date())
-    toggleServer(); updateServerDisplay();
-    tryUpdateLater();
-    document.getElementById('toggle-button').addEventListener('click', () => {
-        console.log('clicked');
-        toggleServer();
-        updateServerDisplay();
-    });
+console.log('READY', new Date())
+toggleServer(); updateServerDisplay();
+tryUpdateLater();
+document.getElementById('toggle-button').addEventListener('click', () => {
+    console.log('clicked');
+    toggleServer();
+    updateServerDisplay();
 });
 
 async function updateStory(prevEvent?: StoryEvent) {

@@ -8,6 +8,14 @@ export interface EventsGroup {
 
 class CommonWalkEvent implements StoryEvent {
     readonly rarity = 1;
+    readonly energy = -1;
+    constructor(readonly description: string) {
+    }
+}
+
+class CommonCampEvent implements StoryEvent {
+    readonly rarity = 1;
+    readonly energy = 1;
     constructor(readonly description: string) {
     }
 }
@@ -36,6 +44,7 @@ export const WALK_EVENTS: EventsGroup[] = [
             {
                 description: `"There's a well-worn path up ahead. Think I'll see where it goes."`,
                 rarity: 1,
+                energy: 0,
             },
         ],
     },
@@ -61,10 +70,12 @@ export const WALK_EVENTS: EventsGroup[] = [
             {
                 description: `"I think I see smoke on the horizon"`,
                 rarity: 10,
+                energy: 1,
             },
             {
                 description: `"The birdsong is lovely"`,
                 rarity: 10,
+                energy: 5,
             },
         ],
     },
@@ -86,16 +97,9 @@ export const CAMP_EVENTS: EventsGroup[] = [
     {
         rarity: 1,
         events: [
-            new CommonWalkEvent('Walked 100 meters'),
-            new CommonWalkEvent('Nothing too eventful happens'),
-            new CommonWalkEvent('Spotted a fallen tree on the horizon'),
-            new CommonWalkEvent('Resting for a moment'),
-            new CommonWalkEvent(`"I think I heard a sound"`),
-            new CommonWalkEvent(`Heading South`),
-            new CommonWalkEvent(`Heading West`),
-            new CommonWalkEvent(`Heading East`),
-            new CommonWalkEvent(`Heading North`),
-            new CommonWalkEvent(`"Lost my bearings. I... think this way is north.`)
+            new CommonCampEvent('Sat for a bit'),
+            new CommonCampEvent('Nothing too eventful happens'),
+            new CommonCampEvent(`"I think I heard a sound"`),
         ],
     },
     // Interesting passive events
@@ -103,8 +107,9 @@ export const CAMP_EVENTS: EventsGroup[] = [
         rarity: 20,
         events: [
             {
-                description: `"There's a well-worn path up ahead. Think I'll see where it goes."`,
+                description: `The breeze is invigorating`,
                 rarity: 1,
+                energy: 5,
             },
         ],
     },
@@ -128,12 +133,14 @@ export const CAMP_EVENTS: EventsGroup[] = [
         rarity: 1000,
         events: [
             {
-                description: `"I think I see smoke on the horizon"`,
+                description: `"You know. I don't feel tired anymore."`,
                 rarity: 10,
+                energy: 100,
             },
             {
                 description: `"The birdsong is lovely"`,
                 rarity: 10,
+                energy: 10,
             },
         ],
     },

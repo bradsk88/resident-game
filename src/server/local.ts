@@ -1,9 +1,11 @@
 import {Server} from "./interface";
-import {generateStoryEvent, WALK_EVENTS} from "../events/generate";
+import {CAMP_EVENTS, generateStoryEvent, WALK_EVENTS} from "../events/generate";
 import * as seedrandom from 'seedrandom'
 import {StoryEvent} from "../types";
 import {map, scan, share, shareReplay, startWith, take, tap, withLatestFrom} from "rxjs/operators";
 import {interval, Observable, Subject} from "rxjs";
+
+const LOOP_TIME = 2000;
 
 interface PartialGameState {
     eventType?: 'walk' | 'camp';
@@ -12,6 +14,7 @@ interface PartialGameState {
 
 interface GameState extends PartialGameState {
     eventType: 'walk' | 'camp';
+    maxEnergy: number;
 }
 
 export class LocalServer implements Server {
@@ -24,26 +27,44 @@ export class LocalServer implements Server {
     constructor() {
         const initialState: GameState = {
             eventType: 'walk',
-            energy: 100,
+            energy: 10,
+            maxEnergy: 10,
         };
         this.gameState$ = this.gameStateChanges$$.pipe(
             scan((acc: GameState, change: PartialGameState) => {
                 const copy = Object.assign({}, acc);
-                copy.energy += change.energy;
+                copy.energy = Math.max(Math.min(acc.maxEnergy, copy.energy + change.energy), 0);
+                if (copy.eventType == 'walk' && copy.energy <= 0) {
+                    copy.eventType = 'camp';
+                }
+                if (copy.eventType == 'camp' && copy.energy >= acc.maxEnergy) {
+                    copy.eventType = 'walk';
+                }
                 return copy;
             }, initialState),
             startWith(initialState),
             tap((v: GameState) => console.log('state:', v)),
             share(),
         );
-        this.gameState$.subscribe();
-
-        this.storyEvents$ = interval(1000).pipe(
+        this.storyEvents$ = interval(LOOP_TIME).pipe(
             withLatestFrom(this.gameState$),
-            map(() => generateStoryEvent(WALK_EVENTS, this.Random)),
+            map(([_, state]: [number, GameState]) => {
+                if (state.energy === 0) {
+                    return {
+                        description: `I can't go on anymore. I need to stop and rest.`,
+                        energy: 1,
+                    } as StoryEvent;
+                }
+                switch(state.eventType) {
+                    case 'walk':
+                        return generateStoryEvent(WALK_EVENTS, this.Random);
+                    default:
+                        return generateStoryEvent(CAMP_EVENTS, this.Random);
+                }
+            }),
             tap((event: StoryEvent) => {
                 this.gameStateChanges$$.next({
-                    energy: -1,
+                    energy: event.energy,
                 })
             }),
             shareReplay(1),

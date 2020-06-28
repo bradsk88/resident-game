@@ -1,5 +1,6 @@
 declare interface Window {
     Resident: {
+        loggingEnabled?: boolean;
         container?: HTMLElement
         storyContainer?: HTMLElement
         story?: HTMLElement

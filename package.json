@@ -6,6 +6,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "rxjs": "^6.5.5",
     "seedrandom": "<3.0.0",
     "typescript": "^3.9.2"
   },
@@ -19,6 +20,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm install; webpack --config webpack.config.js; echo -e \"\\nNow, open dist/index.html in a browser\\n\"",
+    "develop": "npm install; webpack --config webpack.config.js --watch; echo -e \"\\nNow, open dist/index.html in a browser\\n\"",
     "serve": "node persistent-server/server.js"
   },
   "author": "Brad Johnson",

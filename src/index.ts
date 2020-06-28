@@ -24,7 +24,7 @@ toggleServer();
 tryUpdateLater();
 
 async function updateStory(prevEvent?: StoryEvent) {
-    const newEvent = await server.walk();
+    const newEvent = await server.getNextEvent();
     if (newEvent.description === prevEvent?.description) {
         await updateStory(prevEvent);
         return

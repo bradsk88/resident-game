@@ -20,6 +20,7 @@ const clientConfig = {
     },
     resolve: {
         extensions: [ '.tsx', '.ts' , '.js'],
+        modules: ['node_modules'],
     },
     output: {
         filename: '[name].bundle.js',
@@ -43,6 +44,7 @@ function nodeConfig(filePath, name) {
         },
         resolve: {
             extensions: [ '.tsx', '.ts' , '.js'],
+            modules: ['node_modules'],
         },
         output: {
             filename: name + '.node.js',
